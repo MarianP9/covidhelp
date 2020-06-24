@@ -36,8 +36,8 @@ public class Request {
     @Column
     private String rejectionReason;
 
-    @ManyToMany
-    private Set<Account> volunteer;
+    @OneToMany
+    private Set<Account> volunteers;
 
     @ManyToOne
     private Account completedVolunteer;

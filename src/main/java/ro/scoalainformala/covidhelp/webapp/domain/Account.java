@@ -2,7 +2,6 @@ package ro.scoalainformala.covidhelp.webapp.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 
 @Entity
@@ -50,7 +49,4 @@ public class Account {
 
     @Column
     private String profileImage;
-
-    @ManyToMany(mappedBy = "volunteer")
-    private Set<Request> volunteeredRequest;
 }
