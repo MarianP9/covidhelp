@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @Getter
 @ToString
-
 @Entity
 @Table
 public class Request {

@@ -56,4 +56,7 @@ public class Account {
 
     @Column
     private String profileImage;
+
+    @Column
+    private Integer completedRequest;
 }

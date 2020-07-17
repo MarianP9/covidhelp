@@ -9,8 +9,8 @@ import ro.scoalainformala.covidhelp.webapp.repository.AccountRepository;
 @EnableJpaRepositories(basePackageClasses = AccountRepository.class)
 public class Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
 
 }
