@@ -62,7 +62,7 @@
                         <td th:text="${volunteer.email}"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><a
+                        <td colspan="2" class="link"><a
                                 th:href="@{/requester/completed/}+ ${active[index]?.id} +'/'+ ${volunteer?.id}">Completed</a>
                         </td>
                     </tr>
@@ -93,7 +93,7 @@
         <td th:text="${customList.endDate}"></td>
         <td th:text="${customList.status}"></td>
         <td th:text="${customList.rejectionReason}"></td>
-        <td><a th:href="@{/requester/} + ${customList?.id}">Cancel</a></td>
+        <td class="link"><a th:href="@{/requester/} + ${customList?.id}">Cancel</a></td>
     </tr>
 </table>
 
@@ -120,22 +120,7 @@
     </tr>
 </table>
 
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
-</script>
+<script src="js/collapse.js"></script>
 
 </body>
 </html>

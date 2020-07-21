@@ -18,6 +18,22 @@ th {
   color: white;
 }
 
+td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.link{
+  background-color: #4CAF50;
+  text-align: center;
+}
+
 input[type=submit] {
 
   font-size: 15px;

@@ -7,7 +7,7 @@ body {
 }
 
 .form-signin {
-  max-width: 330px;
+  max-width: 400px;
   padding: 15px;
   margin: 0 auto;
 }
@@ -16,8 +16,9 @@ body {
   margin-bottom: 10px;
   margin-left: 78px;
 }
-.form-signin .checkbox {
-  font-weight: 400;
+.form-error{
+  font-size: 18px;
+  margin-left: -27px;
 }
 .form-signin .form-control {
   position: relative;
