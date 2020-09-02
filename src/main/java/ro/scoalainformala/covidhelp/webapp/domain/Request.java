@@ -20,7 +20,7 @@ public class Request {
     @ManyToOne(optional = false)
     private RequestType type;
 
-    @Column(nullable = false)
+    @Column(length = 1000, nullable = false)
     private String details;
 
     @Column(nullable = false)
