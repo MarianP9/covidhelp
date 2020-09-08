@@ -7,4 +7,6 @@ import ro.scoalainformala.covidhelp.webapp.domain.Role;
 public interface AccountRepository extends CrudRepository<Account, Long> {
 
     int countByRole(Role role);
+
+    Account getAccountById(long id);
 }

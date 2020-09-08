@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>CovidHelp</title>
+    <title>CovidHelp Browse Requests</title>
 </head>
+<!--TODO:Improve UI&UX design of browse page-->
 <body>
-    <h1>Browse requests page</h1>
+<h1>All available requests</h1>
+<form action="/browse">
+    <label for="county">County</label><br>
+    <input type="text" id="county" name="county"><br>
+    <label for="city">City</label><br>
+    <input type="text" id="city" name="city"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<table border="1px solid black" , id="requestsTable">
+    <tr th:each="request : ${requestList}">
+        <td th:text="${request.id}" style="width: fit-content">Id</td>
+        <td th:text="${request.getName()}" style="width: fit-content">Name</td>
+        <td th:text="${request.getTypeName()}" style="width: fit-content">Type</td>
+        <td th:text="${request.getLocation()}" style="width: fit-content">Location</td>
+        <td th:text="${request.details}" style="width: available">Details</td>
+        <td><button id="applyButton">Apply</button></td>
+    </tr>
+</table>
+<!--TODO: Move script to its own file-->
+<script>
+    //click listener for table apply buttons
+    let requestsTable = document.getElementById("requestsTable");
+    for (let i = 0; i < requestsTable.rows.length; i++) {
+        requestsTable.rows[i].cells[5].onclick = function () {
+            applyToRequest(requestsTable.rows[i].cells[0].innerHTML);
+        }
+    }
+
+    function applyToRequest(requestId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/browse", true);
+        xhr.setRequestHeader("Content-type","application/json");
+        xhr.send(JSON.stringify(
+            {
+                "id" : requestId
+            }
+        ));
+        xhr.onreadystatechange = function () {
+            if(this.readyState === 4 && this.status === 201) {
+                alert("Accepted apply to request " + requestId);
+            }
+        }
+    }
+</script>
 </body>
 </html>

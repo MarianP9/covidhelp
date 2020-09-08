@@ -1,6 +1,7 @@
 package ro.scoalainformala.covidhelp.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
+import ro.scoalainformala.covidhelp.webapp.domain.Account;
 import ro.scoalainformala.covidhelp.webapp.domain.Role;
 import ro.scoalainformala.covidhelp.webapp.repository.AccountRepository;
 import ro.scoalainformala.covidhelp.webapp.service.AccountService;
@@ -18,5 +19,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public int getVolunteersCount() {
         return repository.countByRole(Role.VOLUNTEER);
+    }
+
+    @Override
+    public Account getAccountById(long id) {
+        return repository.getAccountById(id);
     }
 }
