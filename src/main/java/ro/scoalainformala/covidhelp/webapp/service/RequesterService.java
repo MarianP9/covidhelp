@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface RequesterService {
 
-    String getEmail();
     String firstName(String email);
     String lastName(String email);
     List<Request> getRequestActive(String email);

@@ -2,17 +2,15 @@ package ro.scoalainformala.covidhelp.webapp.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@ToString
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Account {
 
     @Id

@@ -11,13 +11,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Log4j2
 public class GeneralController {
 
-    @RequestMapping(value = "/", method = GET)
-    public ModelAndView homepage() {
-        ModelAndView homepage = new ModelAndView();
-        homepage.setViewName("index");
-        return homepage;
-    }
-
     @RequestMapping(value = "/login", method = GET)
     public ModelAndView login() {
         ModelAndView login = new ModelAndView();
@@ -33,13 +26,6 @@ public class GeneralController {
     }
 
     //you can remove this 2 method to create these controllers
-
-    @RequestMapping(value = "/volunteer", method = GET)
-    public ModelAndView volunteer() {
-        ModelAndView vol = new ModelAndView();
-        vol.setViewName("volunteer");
-        return vol;
-    }
 
     @RequestMapping(value = "/admin", method = GET)
     public ModelAndView admin() {

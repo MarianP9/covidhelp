@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ro.scoalainformala.covidhelp.webapp.domain.Request;
+import ro.scoalainformala.covidhelp.webapp.service.AccountService;
 import ro.scoalainformala.covidhelp.webapp.service.RequesterService;
 
 import java.util.List;
@@ -18,13 +19,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class RequesterController {
 
     @Autowired
+    AccountService accountService;
+    @Autowired
     RequesterService requesterService;
 
     @RequestMapping(method = GET)
     public ModelAndView requesterName() {
         ModelAndView request = new ModelAndView();
 
-        String email = requesterService.getEmail();
+        String email = accountService.getEmail();
         String firstName = requesterService.firstName(email);
         String lastName = requesterService.lastName(email);
         List<Request> requestActiveList = requesterService.getRequestActive(email);

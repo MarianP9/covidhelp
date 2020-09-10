@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CovidHelp</title>
+</head>
+<!--TODO:Improve UI&UX design of homepage-->
+<body>
+    <p><form action="/logout" method="get">
+    <input type="submit" value="Logout"/>
+    </form></p>
+
+    <h1>CovidHelp homepage</h1>
+    <h2>Description</h2>
+    <a href="register">Register</a>
+    <a href="login">Login</a>
+    <a href="browse">Browse</a>
+
+    <h2>Stats</h2>
+    <h3 th:text="'Available requests ' + ${approvedRequests}"></h3>
+    <h3 th:text="'Completed requests ' + ${completedRequests}"></h3>
+    <h3 th:text="'Volunteers ' + ${volunteersCount}"></h3>
+</body>
+</html>
