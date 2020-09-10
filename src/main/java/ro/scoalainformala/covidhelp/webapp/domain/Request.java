@@ -1,10 +1,16 @@
 package ro.scoalainformala.covidhelp.webapp.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-
+@Setter
+@Getter
+@ToString
 @Entity
 @Table
 public class Request {
