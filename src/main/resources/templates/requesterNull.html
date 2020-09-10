@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Requester</title>
+    <link rel="stylesheet" type="text/css" href="css/req.css"/>
+</head>
+<body>
+
+<ul>
+    <li><h1>Hello <span th:text="${fn}"></span> <span th:text="${ln}"></span>!</h1></li>
+    <li>
+        <form action="requester/profile" method="post">
+            <input type="submit" value="Profile page">
+        </form>
+    </li>
+
+    <li>
+        <form action="requester/request" method="post">
+            <input type="submit" value="Place request">
+        </form>
+    </li>
+
+    <li>
+        <form action="/" method="get">
+            <input type="submit" value="Homepage"/>
+        </form>
+    </li>
+
+    <li>
+        <form action="/logout" method="get">
+            <input type="submit" value="Logout"/>
+        </form>
+    </li>
+</ul>
+
+<h2>Active requests</h2>
+
+<table border="2" width=95%>
+    <tr>
+        <th>RequestType</th>
+        <th>Details</th>
+        <th>Address</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Status</th>
+        <th>Rejection Reason</th>
+        <th>Cancel</th>
+    </tr>
+    <tr th:each="customList : ${activeList}">
+        <td th:text="${customList.type.typeName}"></td>
+        <td th:text="${customList.details}"></td>
+        <td th:text="${customList.requester.address}"></td>
+        <td th:text="${customList.startDate}"></td>
+        <td th:text="${customList.endDate}"></td>
+        <td th:text="${customList.status}"></td>
+        <td th:text="${customList.rejectionReason}"></td>
+        <td><a th:href="@{/requester/} + ${customList?.id}">Cancel</a></td>
+    </tr>
+</table>
+
+<h2>Inactive requests</h2>
+
+<table border="2" width=95%>
+    <tr>
+        <th>RequestType</th>
+        <th>Details</th>
+        <th>Address</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Status</th>
+        <th>Rejection Reason</th>
+    </tr>
+    <tr th:each="customList : ${inactiveList}">
+        <td th:text="${customList.type.typeName}"></td>
+        <td th:text="${customList.details}"></td>
+        <td th:text="${customList.requester.address}"></td>
+        <td th:text="${customList.startDate}"></td>
+        <td th:text="${customList.endDate}"></td>
+        <td th:text="${customList.status}"></td>
+        <td th:text="${customList.rejectionReason}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

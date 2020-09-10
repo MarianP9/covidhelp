@@ -1,0 +1,93 @@
+body{
+    background-color: #f2f2f2;
+    color: black;
+}
+
+table{
+    border-collapse: collapse;
+    border: 3px solid black;
+    margin-left: 20px;
+    color: black;
+}
+
+th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.link{
+  background-color: #4CAF50;
+  text-align: center;
+}
+
+input[type=submit] {
+
+  font-size: 15px;
+  width: 100%;
+  background-color: #666666;
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 26px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 5px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+  margin-left: 10px;
+}
+
+li a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background-color: #dddddd;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  word-spacing: 3px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}

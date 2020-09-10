@@ -2,7 +2,7 @@ package ro.scoalainformala.covidhelp.webapp.domain;
 
 
 public enum Role {
-    ADMIN,
-    REQUESTER,
-    VOLUNTEER
+    ROLE_ADMIN,
+    ROLE_REQUESTER,
+    ROLE_VOLUNTEER
 }
