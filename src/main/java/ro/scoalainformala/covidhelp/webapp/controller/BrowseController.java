@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ro.scoalainformala.covidhelp.webapp.service.AccountService;
 import ro.scoalainformala.covidhelp.webapp.service.RequestService;
 
 import java.util.Map;
@@ -13,9 +14,11 @@ import java.util.Map;
 public class BrowseController {
 
     private final RequestService requestService;
+    private final AccountService accountService;
 
-    public BrowseController(RequestService requestService) {
+    public BrowseController(RequestService requestService, AccountService accountService) {
         this.requestService = requestService;
+        this.accountService = accountService;
     }
 
 
@@ -47,7 +50,7 @@ public class BrowseController {
     public ResponseEntity<String> browseApply(@RequestBody Map<String, String> requestBody) {
         System.out.println(requestBody.get("id"));
         long requestId = Long.parseLong(requestBody.get("id"));
-        long volunteerId = 9; //TODO: Get volunteer id through Spring Security
+        long volunteerId = accountService.getAccountByEmail(accountService.getEmail()).getId();
         requestService.addVolunteerToRequest(requestId, volunteerId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

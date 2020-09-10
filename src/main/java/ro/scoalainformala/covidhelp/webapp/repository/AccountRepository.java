@@ -12,4 +12,5 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     int countByRole(Role role);
 
     Account getAccountById(long id);
+    Account getAccountByEmail(String email);
 }

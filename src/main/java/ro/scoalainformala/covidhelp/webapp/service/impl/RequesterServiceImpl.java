@@ -1,4 +1,4 @@
-package ro.scoalainformala.covidhelp.webapp.service;
+package ro.scoalainformala.covidhelp.webapp.service.impl;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +10,7 @@ import ro.scoalainformala.covidhelp.webapp.domain.Request;
 import ro.scoalainformala.covidhelp.webapp.domain.Status;
 import ro.scoalainformala.covidhelp.webapp.repository.AccountRepository;
 import ro.scoalainformala.covidhelp.webapp.repository.RequestRepository;
+import ro.scoalainformala.covidhelp.webapp.service.RequesterService;
 
 import java.util.*;
 
@@ -28,17 +29,6 @@ public class RequesterServiceImpl implements RequesterService {
         this.requestRepository = requestRepository;
     }
 
-    // with this method you get access to the login information
-    public String getEmail() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email;
-        if (principal instanceof UserDetails) {
-            email = ((UserDetails) principal).getUsername();
-        } else {
-            email = principal.toString();
-        }
-        return email;
-    }
 
     @Override
     public String firstName(String email) {
