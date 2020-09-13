@@ -16,12 +16,17 @@ import java.util.Optional;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
+    Encoder encoder;
+
+    @Autowired
     AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Account> account = accountRepository.findByEmail(email);
         account.orElseThrow(() -> new UsernameNotFoundException("not found"));
+        Account decryptAccount = account.get();
+        encoder.decrypt(decryptAccount);
         return account.map(MyUserDetails::new).get();
     }
 
