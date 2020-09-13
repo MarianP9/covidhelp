@@ -16,7 +16,7 @@
     <form th:action="@{/requester/placeRequest}" th:object="${request}" method="post">
         <label for="type">Request type</label>
         <select id="type" th:field="*{type}" required>
-            <option value="" disabled selected>Please select...</option>
+            <option value="" th:selected th:disabled>Please select...</option>
             <option th:each="requestType : ${requestTypes}"
                     th:value="${requestType.id}"
                     th:utext="${requestType.typeName}"></option>
@@ -27,6 +27,7 @@
         <br>
         <textarea id="details" th:field="*{details}"
                   placeholder="Details about your request(eg. what you need bought, or any other relevant info.) "
+                  maxlength="900"
                   required></textarea>
 
         <label for="startdate">Start date</label>

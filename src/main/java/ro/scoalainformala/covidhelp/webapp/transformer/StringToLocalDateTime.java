@@ -10,9 +10,8 @@ import java.time.format.DateTimeFormatter;
 public class StringToLocalDateTime implements Converter<String, LocalDateTime> {
     @Override
     public LocalDateTime convert(String s) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         if (s.isEmpty())
             return LocalDateTime.now();
-        return LocalDateTime.parse(s, formatter);
+        return LocalDateTime.parse(s, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
     }
 }

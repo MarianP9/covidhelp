@@ -13,7 +13,6 @@ public class StringToRequestType implements Converter<String, RequestType> {
 
     @Override
     public RequestType convert(String s) {
-        Long id = Long.valueOf(s);
-        return repository.findById(id).get();
+        return repository.findById(Long.valueOf(s)).get();
     }
 }

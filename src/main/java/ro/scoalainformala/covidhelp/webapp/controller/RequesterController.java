@@ -79,19 +79,19 @@ public class RequesterController {
 
     @GetMapping("/placeRequest")
     public ModelAndView placeRequestForm() {
-        ModelAndView request = new ModelAndView();
-        request.setViewName("placeRequest");
-        request.addObject("request", new Request());
-        request.addObject("requestTypes", requestTypeService.getAll());
-        return request;
+        ModelAndView requestForm = new ModelAndView();
+        requestForm.setViewName("placeRequest");
+        requestForm.addObject("request", new Request());
+        requestForm.addObject("requestTypes", requestTypeService.getAll());
+        return requestForm;
     }
 
-    @PostMapping("placeRequest")
+    @PostMapping("/placeRequest")
     public ModelAndView placeRequestSubmit(@ModelAttribute("request") Request request) {
         request.setRequester(accountService.getAccountByEmail(accountService.getEmail()));
         request.setStatus(Status.PENDING);
         requestService.addRequest(request);
-        return new ModelAndView("homepage");
+        return new ModelAndView("redirect:/requester");
     }
 
 }
