@@ -6,9 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ro.scoalainformala.covidhelp.webapp.domain.Request;
+import ro.scoalainformala.covidhelp.webapp.domain.RequestType;
+import ro.scoalainformala.covidhelp.webapp.domain.Status;
 import ro.scoalainformala.covidhelp.webapp.service.AccountService;
+import ro.scoalainformala.covidhelp.webapp.service.RequestService;
+import ro.scoalainformala.covidhelp.webapp.service.RequestTypeService;
 import ro.scoalainformala.covidhelp.webapp.service.RequesterService;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -20,6 +26,10 @@ public class RequesterController {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    RequestService requestService;
+    @Autowired
+    RequestTypeService requestTypeService;
     @Autowired
     RequesterService requesterService;
 
@@ -67,11 +77,21 @@ public class RequesterController {
         return profile;
     }
 
-    @RequestMapping(value = "/request", method = POST)
-    public ModelAndView request() {
+    @GetMapping("/placeRequest")
+    public ModelAndView placeRequestForm() {
         ModelAndView request = new ModelAndView();
-        request.setViewName("request");
+        request.setViewName("placeRequest");
+        request.addObject("request", new Request());
+        request.addObject("requestTypes", requestTypeService.getAll());
         return request;
+    }
+
+    @PostMapping("placeRequest")
+    public ModelAndView placeRequestSubmit(@ModelAttribute("request") Request request) {
+        request.setRequester(accountService.getAccountByEmail(accountService.getEmail()));
+        request.setStatus(Status.PENDING);
+        requestService.addRequest(request);
+        return new ModelAndView("homepage");
     }
 
 }

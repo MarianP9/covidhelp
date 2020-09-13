@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/placeRequest.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <title>Place request</title>
+</head>
+<body>
+<p>
+<form action="/logout" method="get">
+    <input type="submit" value="Logout"/>
+</form>
+</p>
+<div class="placeRequestForm">
+    <form th:action="@{/requester/placeRequest}" th:object="${request}" method="post">
+        <label for="type">Request type</label>
+        <select id="type" th:field="*{type}" required>
+            <option value="" disabled selected>Please select...</option>
+            <option th:each="requestType : ${requestTypes}"
+                    th:value="${requestType.id}"
+                    th:utext="${requestType.typeName}"></option>
+        </select>
+
+        <br>
+        <label for="details">Details</label>
+        <br>
+        <textarea id="details" th:field="*{details}"
+                  placeholder="Details about your request(eg. what you need bought, or any other relevant info.) "
+                  required></textarea>
+
+        <label for="startdate">Start date</label>
+        <input type="datetime-local" th:field="*{startDate}" id="startdate">
+
+        <label for="enddate">End date</label>
+        <input type="datetime-local" th:field="*{endDate}" id="enddate" required>
+
+        <input type="submit" value="Submit request">
+    </form>
+</div>
+</body>
+</html>

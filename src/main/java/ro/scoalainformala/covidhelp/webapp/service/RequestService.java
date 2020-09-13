@@ -1,5 +1,6 @@
 package ro.scoalainformala.covidhelp.webapp.service;
 
+import ro.scoalainformala.covidhelp.webapp.domain.Request;
 import ro.scoalainformala.covidhelp.webapp.dto.RequestBrowseDto;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface RequestService {
     List<RequestBrowseDto> getAvailableRequestsByCountyAndCity(String county, String city);
 
     void addVolunteerToRequest(long requestId, long volunteerId);
+
+    void addRequest(Request request);
 }
