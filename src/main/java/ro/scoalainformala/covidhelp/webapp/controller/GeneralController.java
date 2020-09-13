@@ -22,13 +22,6 @@ public class GeneralController {
     @Autowired
     GeneralService generalService;
 
-    @RequestMapping(value = "/", method = GET)
-    public ModelAndView homepage() {
-        ModelAndView homepage = new ModelAndView();
-        homepage.setViewName("index");
-        return homepage;
-    }
-
     @RequestMapping(value = "/login", method = GET)
     public ModelAndView login() {
         ModelAndView login = new ModelAndView();
