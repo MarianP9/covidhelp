@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ro.scoalainformala.covidhelp.webapp.domain.Request;
+import ro.scoalainformala.covidhelp.webapp.dto.RequestViewDto;
 import ro.scoalainformala.covidhelp.webapp.service.RequesterService;
 
 import java.util.List;
@@ -27,10 +27,11 @@ public class RequesterController {
         String email = requesterService.getEmail();
         String firstName = requesterService.firstName(email);
         String lastName = requesterService.lastName(email);
-        List<Request> requestActiveList = requesterService.getRequestActive(email);
-        List<Request> requestInactiveList = requesterService.getRequestInactive(email);
-        List<Request> getActiveRequests = requesterService.getRequestWithVolunteer(email);
+        List<RequestViewDto> requestActiveList = requesterService.getRequestActive(email);
+        List<RequestViewDto> requestInactiveList = requesterService.getRequestInactive(email);
+        List<RequestViewDto> getActiveRequests = requesterService.getRequestWithVolunteer(email);
         List<Integer> size = requesterService.getRequestWithVolunteerSize(email);
+        requesterService.getAllRequestViewDtoList();
         request.addObject("fn", firstName);
         request.addObject("ln", lastName);
         request.addObject("activeList", requestActiveList);

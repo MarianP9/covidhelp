@@ -34,7 +34,7 @@
 
 <tr th:each="index : ${#numbers.sequence( 0, #arrays.length(active)-1)}">
     <button type="button" class="collapsible"
-            th:text="|${active[index].type.typeName}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${active[index].details}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${size[index]} volunteer|"></button>
+            th:text="|${active[index].requestType}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${active[index].details}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${size[index]} volunteer|"></button>
     <div class="content">
         <div th:each="volunteer : ${active[index].volunteers}">
             <button type="button" class="collapsible"
@@ -63,7 +63,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="link"><a
-                                th:href="@{/requester/completed/}+ ${active[index]?.id} +'/'+ ${volunteer?.id}">Completed</a>
+                                th:href="@{/requester/completed/}+ ${active[index]?.requestId} +'/'+ ${volunteer?.id}">Completed</a>
                         </td>
                     </tr>
                 </table>
@@ -82,18 +82,16 @@
         <th>Start date</th>
         <th>End date</th>
         <th>Status</th>
-        <th>Rejection Reason</th>
         <th>Cancel</th>
     </tr>
     <tr th:each="customList : ${activeList}">
-        <td th:text="${customList.type.typeName}"></td>
+        <td th:text="${customList.requestType}"></td>
         <td th:text="${customList.details}"></td>
-        <td th:text="${customList.requester.address}"></td>
+        <td th:text="${customList.address}"></td>
         <td th:text="${customList.startDate}"></td>
         <td th:text="${customList.endDate}"></td>
         <td th:text="${customList.status}"></td>
-        <td th:text="${customList.rejectionReason}"></td>
-        <td class="link"><a th:href="@{/requester/} + ${customList?.id}">Cancel</a></td>
+        <td class="link"><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></td>
     </tr>
 </table>
 
@@ -110,9 +108,9 @@
         <th>Rejection Reason</th>
     </tr>
     <tr th:each="customList : ${inactiveList}">
-        <td th:text="${customList.type.typeName}"></td>
+        <td th:text="${customList.requestType}"></td>
         <td th:text="${customList.details}"></td>
-        <td th:text="${customList.requester.address}"></td>
+        <td th:text="${customList.address}"></td>
         <td th:text="${customList.startDate}"></td>
         <td th:text="${customList.endDate}"></td>
         <td th:text="${customList.status}"></td>

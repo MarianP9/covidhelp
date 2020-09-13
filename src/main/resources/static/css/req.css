@@ -49,6 +49,20 @@ input[type=submit] {
   margin-right: 10px;
 }
 
+input[type=submit].edit{
+  font-size: 15px;
+  width: 10%;
+  background-color: #666666;
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 26px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 ul {
   list-style-type: none;
   margin: 5px;
@@ -90,4 +104,8 @@ li a {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+}
+
+.errors{
+    color: red;
 }
