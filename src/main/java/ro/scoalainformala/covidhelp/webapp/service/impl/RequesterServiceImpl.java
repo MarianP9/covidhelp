@@ -75,7 +75,7 @@ public class RequesterServiceImpl implements RequesterService {
         long id = Objects.requireNonNull(accountRepository.findByEmail(email).orElse(null)).getId();
         List<RequestViewDto> requestViewDtoList = getAllRequestViewDtoList();
         List<RequestViewDto> requestFilter = new ArrayList<>();
-        test.stream()
+        requestViewDtoList.stream()
                 .filter(f -> f.getRequesterId() == id)
                 .filter(f -> f.getStatus() == Status.PENDING || f.getStatus() == Status.APPROVED)
                 .sorted(Comparator.comparing(RequestViewDto::getRequestId).reversed()).collect(toList())
@@ -104,7 +104,7 @@ public class RequesterServiceImpl implements RequesterService {
     @Override
     public List<RequestViewDto> getRequestWithVolunteer(String email) {
         long id = Objects.requireNonNull(accountRepository.findByEmail(email).orElse(null)).getId();
-        List<RequestViewDto> test = getAllRequestViewDtoList();
+        List<RequestViewDto> requestViewDtoList = getAllRequestViewDtoList();
         List<RequestViewDto> requestFilter = new ArrayList<>();
         requestViewDtoList.stream()
                 .filter(f -> f.getRequesterId() == id)
