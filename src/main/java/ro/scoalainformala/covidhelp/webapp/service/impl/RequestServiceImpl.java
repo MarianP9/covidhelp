@@ -71,4 +71,9 @@ public class RequestServiceImpl implements RequestService {
         request.getVolunteers().add(volunteer);
         repository.save(request);
     }
+
+    @Override
+    public void addRequest(Request request) {
+        repository.save(request);
+    }
 }
