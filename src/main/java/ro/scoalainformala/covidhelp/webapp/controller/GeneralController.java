@@ -66,13 +66,6 @@ public class GeneralController {
 
     //you can remove this 2 method to create these controllers
 
-    @RequestMapping(value = "/volunteer", method = GET)
-    public ModelAndView volunteer() {
-        ModelAndView vol = new ModelAndView();
-        vol.setViewName("volunteer");
-        return vol;
-    }
-
     @RequestMapping(value = "/admin", method = GET)
     public ModelAndView admin() {
         ModelAndView admin = new ModelAndView();

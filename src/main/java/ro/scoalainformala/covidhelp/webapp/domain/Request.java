@@ -2,17 +2,16 @@ package ro.scoalainformala.covidhelp.webapp.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Setter
-@Getter
-@ToString
+
 @Entity
 @Table
+@Getter
+@Setter
 public class Request {
 
     @Id
@@ -26,7 +25,7 @@ public class Request {
     @ManyToOne(optional = false)
     private RequestType type;
 
-    @Column(nullable = false)
+    @Column(length = 1000, nullable = false)
     private String details;
 
     @Column(nullable = false)
@@ -42,7 +41,7 @@ public class Request {
     @Column
     private String rejectionReason;
 
-    @OneToMany
+    @ManyToMany
     private Set<Account> volunteers;
 
     @ManyToOne

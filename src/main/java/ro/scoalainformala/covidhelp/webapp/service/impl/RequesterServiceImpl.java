@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import ro.scoalainformala.covidhelp.webapp.domain.Account;
 import ro.scoalainformala.covidhelp.webapp.domain.Request;
 import ro.scoalainformala.covidhelp.webapp.domain.Status;
+
 import ro.scoalainformala.covidhelp.webapp.dto.RequestViewDto;
+import ro.scoalainformala.covidhelp.webapp.transformer.RequestToRequestViewDtoTransformer;
 import ro.scoalainformala.covidhelp.webapp.repository.AccountRepository;
 import ro.scoalainformala.covidhelp.webapp.repository.RequestRepository;
 import ro.scoalainformala.covidhelp.webapp.service.RequesterService;
-import ro.scoalainformala.covidhelp.webapp.transformer.RequestToRequestViewDtoTransformer;
 
 import java.util.*;
 
@@ -24,6 +25,7 @@ public class RequesterServiceImpl implements RequesterService {
 
     public final AccountRepository accountRepository;
     public final RequestRepository requestRepository;
+
     public final RequestToRequestViewDtoTransformer transformer;
 
     public RequesterServiceImpl(AccountRepository accountRepository,
@@ -52,6 +54,7 @@ public class RequesterServiceImpl implements RequesterService {
         return Objects.requireNonNull(accountRepository.findByEmail(email).orElse(null)).getFirstName();
     }
 
+
     // this method will get the last name of the user
     @Override
     public String lastName(String email) {
@@ -70,7 +73,7 @@ public class RequesterServiceImpl implements RequesterService {
     @Override
     public List<RequestViewDto> getRequestActive(String email) {
         long id = Objects.requireNonNull(accountRepository.findByEmail(email).orElse(null)).getId();
-        List<RequestViewDto> test = getAllRequestViewDtoList();
+        List<RequestViewDto> requestViewDtoList = getAllRequestViewDtoList();
         List<RequestViewDto> requestFilter = new ArrayList<>();
         test.stream()
                 .filter(f -> f.getRequesterId() == id)
@@ -85,7 +88,7 @@ public class RequesterServiceImpl implements RequesterService {
     @Override
     public List<RequestViewDto> getRequestInactive(String email) {
         long id = Objects.requireNonNull(accountRepository.findByEmail(email).orElse(null)).getId();
-        List<RequestViewDto> test = getAllRequestViewDtoList();
+        List<RequestViewDto> requestViewDtoList = getAllRequestViewDtoList();
         List<RequestViewDto> requestFilter = new ArrayList<>();
         test.stream()
                 .filter(f -> f.getRequesterId() == id)
@@ -95,6 +98,7 @@ public class RequesterServiceImpl implements RequesterService {
 
         return requestFilter;
     }
+
 
     // this method will get those request view dto which was accepted by a volunteer
     @Override
@@ -121,6 +125,7 @@ public class RequesterServiceImpl implements RequesterService {
         return integerList;
     }
 
+
     // this method will cancel a request
     @Override
     public void cancelRequest(@Param("id") Long id) {
@@ -129,6 +134,7 @@ public class RequesterServiceImpl implements RequesterService {
         Objects.requireNonNull(request).setStatus(Status.CANCELLED);
         requestRepository.save(request);
     }
+
 
     // this method will change the request status to completed will add the volunteer's id
     @Override

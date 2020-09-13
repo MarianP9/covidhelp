@@ -14,12 +14,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@ToString
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Account {
 
     @Id
