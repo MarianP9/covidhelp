@@ -3,6 +3,7 @@ package ro.scoalainformala.covidhelp.webapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import ro.scoalainformala.covidhelp.webapp.service.AccountService;
 import ro.scoalainformala.covidhelp.webapp.service.RequestService;
 
@@ -18,10 +19,13 @@ public class HomepageController {
     }
 
     @GetMapping(value = "/")
-    public String homepage(Model model){
-        model.addAttribute("approvedRequests", requestService.getApprovedRequestsCount());
-        model.addAttribute("completedRequests", requestService.getCompletedRequestsCount());
-        model.addAttribute("volunteersCount", accountService.getVolunteersCount());
-        return "homepage";
+    public ModelAndView homepage(){
+        ModelAndView homepage = new ModelAndView();
+        homepage.setViewName("homepage");
+        homepage.addObject("volunteersCount", accountService.getVolunteersCount());
+        homepage.addObject("completedRequests", requestService.getCompletedRequestsCount());
+        homepage.addObject("shoppingCount", requestService.getShoppingRequestsCount());
+        homepage.addObject("petwalkingCount", requestService.getPetwalkingRequestsCount());
+        return homepage;
     }
 }

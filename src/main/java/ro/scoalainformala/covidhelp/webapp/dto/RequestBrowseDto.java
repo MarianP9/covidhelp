@@ -7,6 +7,7 @@ import ro.scoalainformala.covidhelp.webapp.domain.RequestType;
 import ro.scoalainformala.covidhelp.webapp.domain.Status;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -28,6 +29,10 @@ public class RequestBrowseDto {
     }
 
     public String getLocation() {
-        return requester.getCounty() + ", " + requester.getCity();
+        return requester.getCounty() + ", " + requester.getCity() + ", " + requester.getStreet();
+    }
+
+    public String getFormattedEndTime() {
+        return endDate.format(DateTimeFormatter.ofPattern("dd MM yyyy HH:mm"));
     }
 }

@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/css/homepage.css}"/>
     <title>CovidHelp</title>
 </head>
-<!--TODO:Improve UI&UX design of homepage-->
 <body>
-    <p><form action="/logout" method="get">
-    <input type="submit" value="Logout"/>
-    </form></p>
-
-    <h1>CovidHelp homepage</h1>
-    <h2>Description</h2>
-    <a href="register">Register</a>
-    <a href="login">Login</a>
-    <a href="browse">Browse</a>
-
-    <h2>Stats</h2>
-    <h3 th:text="'Available requests ' + ${approvedRequests}"></h3>
-    <h3 th:text="'Completed requests ' + ${completedRequests}"></h3>
-    <h3 th:text="'Volunteers ' + ${volunteersCount}"></h3>
+<div class="bg-img" th:style="'background-image: url(/images/background.png);'"></div>
+<div class="logo">
+    <span>CovidHelp</span>
+</div>
+<div class="description">
+    <span>CovidHelp is the place where volunteers can help persons that belong to the high risk groups of COVID-19. Whether you need shopping done or want your pet to be walked, our volunteers can do tasks for you so that you are safe from any risks.</span>
+</div>
+<div class="btns">
+    <a class="btn purple" href="register">Sign up</a>
+    <a class="btn cyan" href="login">Log in</a>
+</div>
+<div class="stats">
+    <div class="statsColumn">
+        <div class="statsItm">
+            <img class="statsImg" th:src="@{/images/volunteers.png}" height="70" width="70"/>
+            <span class="statsText" style= "vertical-align: middle;" th:text="${volunteersCount} + ' volunteers'"></span>
+        </div>
+        <div class="statsItm">
+            <img class="statsImg" th:src="@{/images/bag.png}" height="70" width="70"/>
+            <span class="statsText" style= "vertical-align: middle;" th:text="${shoppingCount} + ' shopping deliveries'"></span>
+        </div>
+    </div>
+    <div class="statsColumn">
+        <div class="statsItm">
+            <img class="statsImg" th:src="@{/images/check.png}" height="70" width="70"/>
+            <span class="statsText" style= "vertical-align: middle;" th:text="${completedRequests} + ' completed requests'"></span>
+        </div>
+        <div class="statsItm">
+            <img class="statsImg" th:src="@{/images/pet.png}" height="70" width="70"/>
+            <span class="statsText" style= "vertical-align: middle; " th:text="${petwalkingCount} + ' pets walked'"></span>
+        </div>
+    </div>
+</div>
 </body>
 </html>
