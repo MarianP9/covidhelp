@@ -72,13 +72,6 @@ public class RequesterController {
         return "redirect:/requester";
     }
 
-    @RequestMapping(value = "/profile", method = POST)
-    public ModelAndView profile() {
-        ModelAndView profile = new ModelAndView();
-        profile.setViewName("profile");
-        return profile;
-    }
-
     @GetMapping("/placeRequest")
     public ModelAndView placeRequestForm() {
         ModelAndView requestForm = new ModelAndView();

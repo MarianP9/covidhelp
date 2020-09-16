@@ -56,14 +56,4 @@ public class GeneralController {
         save.setViewName("successful");
         return save;
     }
-
-    //you can remove this 2 method to create these controllers
-
-    @RequestMapping(value = "/admin", method = GET)
-    public ModelAndView admin() {
-        ModelAndView admin = new ModelAndView();
-        admin.setViewName("admin");
-        return admin;
-    }
-
 }
