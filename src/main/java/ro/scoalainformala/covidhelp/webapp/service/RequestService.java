@@ -16,4 +16,8 @@ public interface RequestService {
     void addVolunteerToRequest(long requestId, long volunteerId);
 
     void addRequest(Request request);
+
+    int getShoppingRequestsCount();
+
+    int getPetwalkingRequestsCount();
 }

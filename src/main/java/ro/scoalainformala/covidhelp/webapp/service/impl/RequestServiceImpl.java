@@ -6,6 +6,7 @@ import ro.scoalainformala.covidhelp.webapp.domain.Request;
 import ro.scoalainformala.covidhelp.webapp.domain.Status;
 import ro.scoalainformala.covidhelp.webapp.dto.RequestBrowseDto;
 import ro.scoalainformala.covidhelp.webapp.repository.RequestRepository;
+import ro.scoalainformala.covidhelp.webapp.repository.RequestTypeRepository;
 import ro.scoalainformala.covidhelp.webapp.service.AccountService;
 import ro.scoalainformala.covidhelp.webapp.service.RequestService;
 import ro.scoalainformala.covidhelp.webapp.transformer.RequestToRequestBrowseDtoTransformer;
@@ -17,11 +18,13 @@ import java.util.List;
 public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository repository;
+    private final RequestTypeRepository requestTypeRepository;
     private final RequestToRequestBrowseDtoTransformer transformer;
     private final AccountService accountService;
 
-    public RequestServiceImpl(RequestRepository repository, RequestToRequestBrowseDtoTransformer transformer, AccountService accountService) {
+    public RequestServiceImpl(RequestRepository repository, RequestTypeRepository requestTypeRepository, RequestToRequestBrowseDtoTransformer transformer, AccountService accountService) {
         this.repository = repository;
+        this.requestTypeRepository = requestTypeRepository;
         this.accountService = accountService;
         this.transformer = transformer;
     }
@@ -75,5 +78,15 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public void addRequest(Request request) {
         repository.save(request);
+    }
+
+    @Override
+    public int getShoppingRequestsCount() {
+        return repository.countByStatusAndType(Status.COMPLETED, requestTypeRepository.findByTypeName("Shopping"));
+    }
+
+    @Override
+    public int getPetwalkingRequestsCount() {
+        return repository.countByStatusAndType(Status.COMPLETED, requestTypeRepository.findByTypeName("Petwalking"));
     }
 }

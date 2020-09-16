@@ -91,7 +91,7 @@ public class RequesterController {
     @PostMapping("/placeRequest")
     public ModelAndView placeRequestSubmit(@ModelAttribute("request") Request request) {
         request.setRequester(accountService.getAccountByEmail(accountService.getEmail()));
-        request.setStatus(Status.PENDING);
+        request.setStatus(Status.APPROVED);
         requestService.addRequest(request);
         return new ModelAndView("redirect:/requester");
     }

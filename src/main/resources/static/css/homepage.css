@@ -1,0 +1,109 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat;
+    font-weight: bold;
+}
+
+.bg-img {
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 41% 50%;
+    filter: blur(6px) opacity(50%);
+}
+
+.logo {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 20%;
+    left: 50%;
+    text-align: center;
+    font-size: 110px;
+    font-style: normal;
+    -webkit-text-stroke: 2px #FF4365;
+    filter: drop-shadow(7px 7px 2px rgba(0, 0, 0, 0.161));
+    color: rgba(255, 96, 132, 1);
+}
+
+.description {
+    width: 570px;
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 20px;
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.161));
+    color: rgba(1, 28, 39, 1);
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 28px;
+}
+
+.btns {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.btn {
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 70px;
+    border-radius: 100px;
+}
+
+.purple {
+    box-shadow: 5px 7px 20px 0px #6E44FF;
+    background-color: #6E44FF;
+}
+
+.purple:hover {
+    background-color: #5a2bff;
+    box-shadow: 5px 7px 20px 0px #5a2bff;
+}
+
+.cyan {
+    box-shadow: 5px 7px 20px 0px #1B98E0;
+    background-color: #1B98E0;
+}
+
+.cyan:hover {
+    box-shadow: 5px 7px 20px 0px #1a88dd;
+    background-color: #1a88dd;
+}
+
+.stats {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.statsColumn {
+    display: flex;
+}
+
+.statsItm {
+    width: 400px;
+    height: 70px;
+    display: table;
+    margin: 25px;
+}
+
+.statsText {
+    font-size: 25px;
+    display: table-cell;
+    text-align: center;
+    padding: 0 15px;
+}
