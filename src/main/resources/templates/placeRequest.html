@@ -7,11 +7,14 @@
     <title>Place request</title>
 </head>
 <body>
-<p>
-<form action="/logout" method="get">
-    <input type="submit" value="Logout"/>
-</form>
-</p>
+<div class="navbar">
+    <div class="textLogo">
+        <p>CovidHelp</p>
+    </div>
+    <div>
+        <a class="logoutBtn" href="/logout">Log out</a>
+    </div>
+</div>
 <div class="placeRequestForm">
     <form th:action="@{/requester/placeRequest}" th:object="${request}" method="post">
         <label for="type">Request type</label>
