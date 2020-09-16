@@ -10,8 +10,7 @@ public interface RequestService {
     int getCompletedRequestsCount();
 
     List<RequestBrowseDto> getAvailableRequests();
-    List<RequestBrowseDto> getAvailableRequestsByCounty(String county);
-    List<RequestBrowseDto> getAvailableRequestsByCountyAndCity(String county, String city);
+    List<RequestBrowseDto> getFilteredAvailableRequests(String county, String city, String type);
 
     void addVolunteerToRequest(long requestId, long volunteerId);
 

@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ro.scoalainformala.covidhelp.webapp.service.AccountService;
 import ro.scoalainformala.covidhelp.webapp.service.RequestService;
+import ro.scoalainformala.covidhelp.webapp.service.RequestTypeService;
 
 import java.util.Map;
 
@@ -15,35 +17,34 @@ public class BrowseController {
 
     private final RequestService requestService;
     private final AccountService accountService;
+    private final RequestTypeService requestTypeService;
 
-    public BrowseController(RequestService requestService, AccountService accountService) {
+    public BrowseController(RequestService requestService, AccountService accountService, RequestTypeService requestTypeService) {
         this.requestService = requestService;
         this.accountService = accountService;
+        this.requestTypeService = requestTypeService;
     }
 
 
     @GetMapping(value = "/browse")
-    public String browse(Model model) {
-        model.addAttribute("requestList", requestService.getAvailableRequests());
-        return "browse";
+    public ModelAndView browse() {
+        ModelAndView browseView = new ModelAndView();
+        browseView.setViewName("browse");
+        browseView.addObject("requestTypes", requestTypeService.getAll());
+        browseView.addObject("requestList", requestService.getAvailableRequests());
+        return browseView;
     }
 
-    @GetMapping(value = "/browse", params = "county")
-    public String browseByCounty(Model model,
-                                 @RequestParam("county") String county) {
-        model.addAttribute("requestList", requestService.getAvailableRequestsByCounty(county));
-        return "browse";
-    }
 
-    //TODO: Implement filtering for request type
-    //TODO: Implement more efficient filtering through only one mapping (Filter class)
-    //TODO: Implement sorting for requests
-    @GetMapping(value = "/browse", params = {"county", "city"})
-    public String browseByCountyAndCity(Model model,
-                                        @RequestParam("county") String county,
-                                        @RequestParam("city") String city) {
-        model.addAttribute("requestList", requestService.getAvailableRequestsByCountyAndCity(county, city));
-        return "browse";
+    @GetMapping(value = "/browse", params = {"county", "city", "type"})
+    public ModelAndView browseByCountyAndCity(@RequestParam("county") String county,
+                                              @RequestParam("city") String city,
+                                              @RequestParam("type") String type) {
+        ModelAndView browseView = new ModelAndView();
+        browseView.setViewName("browse");
+        browseView.addObject("requestTypes", requestTypeService.getAll());
+        browseView.addObject("requestList", requestService.getFilteredAvailableRequests(county, city, type));
+        return browseView;
     }
 
     @PostMapping(path = "/browse", consumes = "application/json")
