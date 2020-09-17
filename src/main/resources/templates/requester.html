@@ -1,119 +1,239 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Requester</title>
-    <link rel="stylesheet" type="text/css" href="css/req.css"/>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/requester.css}"/>
+<!--    <script th:src="@{/js/collapse.js}" }></script>-->
+    <title>Own Requests</title>
 </head>
+
 <body>
+<div class="navbar">
+    <div class="textLogo">
+        <p>CovidHelp</p>
+    </div>
+    <a class="prButton" th:href="@{requester/placeRequest}">Place Request</a>
+    <a class="logoutBtn" th:href="@{/logout}">Log out</a>
+</div>
 
-<ul>
-    <li><h1>Hello <span th:text="${fn}"></span> <span th:text="${ln}"></span>!</h1></li>
-
-    <li>
-        <form action="requester/placeRequest" method="get">
-            <input type="submit" value="Place request">
-        </form>
-    </li>
-
-    <li>
-        <form action="/" method="get">
-            <input type="submit" value="Homepage"/>
-        </form>
-    </li>
-
-    <li>
-        <form action="/logout" method="get">
-            <input type="submit" value="Logout"/>
-        </form>
-    </li>
-</ul>
-
-<tr th:each="index : ${#numbers.sequence( 0, #arrays.length(active)-1)}">
-    <button type="button" class="collapsible"
-            th:text="|${active[index].requestType}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${active[index].details}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${size[index]} volunteer|"></button>
-    <div class="content">
-        <div th:each="volunteer : ${active[index].volunteers}">
-            <button type="button" class="collapsible"
-                    th:text="Name + ': ' +${volunteer.firstName}+' '+${volunteer.lastName}"></button>
-            <div class="content">
-                <table border="2" width="30%">
-                    <tr>
-                        <td>Country:</td>
-                        <td th:text="${volunteer.county}"></td>
-                    </tr>
-                    <tr>
-                        <td>City:</td>
-                        <td th:text="${volunteer.city}"></td>
-                    </tr>
-                    <tr>
-                        <td>Nr. of requests completed:</td>
-                        <td th:text="${volunteer.completedRequest} ?: '0'"></td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td th:text="${volunteer.phoneNumber}"></td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td th:text="${volunteer.email}"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="link"><a
-                                th:href="@{/requester/completed/}+ ${active[index]?.requestId} +'/'+ ${volunteer?.id}">Completed</a>
-                        </td>
-                    </tr>
-                </table>
+<div class="activeReq">
+    <h1 th:text="'Hello '+ ${fn} + ' ' + ${ln}"></h1>
+    <h2>Requests with volunteers</h2>
+    <div class="requestContainer" th:each="index : ${#numbers.sequence( 0, #arrays.length(active)-1)}">
+        <div class="requestBody">
+            <div class="requesType">
+                <img class="requestTypeImg" th:src="'/images/bag.png'" />
+                <p class="requestTypeName" th:text="${active[index].requestType}"></p>
+            </div>
+            <div class="details">
+                <p class="detailsName">Details: </p>
+                <p th:text="${active[index].details}"></p>
             </div>
         </div>
+        <div class="volunteersDropdown">
+            <p th:text="'Volunteers: ' + ${size[index]}"></p>
+        </div>
+        <div class="volunteer" th:if="${active[index].volunteers != null}" th:each="volunteer : ${active[index].volunteers}">
+            <div class="firstRow">
+                <div class="volunteerName">
+                    <p class="volunteerTxt" th:text="${volunteer.firstName}+ ' ' + ${volunteer.lastName}"></p>
+                </div>
+                <div class="volunteerLocation">
+                    <p class="volunteerTxt" th:text="${volunteer.county} + ', ' + ${volunteer.city} + ', ' + ${volunteer.street}"></p>
+                </div>
+                <div class="volunteerCompReq">
+                    <p class="volunteerTxt" th:text="'Completed requests: ' + ${volunteer.getCompletedRequest()}"></p>
+                </div>
+            </div>
+            <div class="secondRow">
+                <div class="volunteerPhone">
+                    <p class="volunteerTxt" th:text="'Phone: ' + ${volunteer.getPhoneNumber()}"></p>
+                </div>
+                <div class="volunteerEmail">
+                    <p class="volunteerTxt" th:text="'Email: ' + ${volunteer.getEmail()}"></p>
+                </div>
+                <div class="grow">
+                </div>
+                <div class="volunteerCompBtn">
+                    <a th:href="@{/requester/completed/}+ ${active[index]?.requestId} +'/'+ ${volunteer?.id}">Completed</a>
+                </div>
+            </div>
+        </div>
+        <div class="requestFooter">
+            <div class="cancelButton"><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></div>
+            <div class="endDate" th:text="'End date: ' + ${active[index].getEndDate()}"></div>
+        </div>
     </div>
-</tr>
+</div>
 
-<h2>Active requests</h2>
+<div class="activeReq">
+    <h2>Active Requests</h2>
+    <div class="requestContainer" th:each="customList : ${activeList}">
+        <div class="requestBody">
+            <div class="requesType">
+                <img class="requestTypeImg" th:src="'/images/bag.png'" />
+                <p class="requestTypeName" th:text="${customList.requestType}"></p>
+            </div>
+            <div class="details">
+                <p class="detailsName">Details: </p>
+                <p th:text="${customList.details}"></p>
+            </div>
+        </div>
+        <div class="requestFooter">
+            <div class="cancelButton"><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></div>
+            <div class="endDate" th:text="'End date: ' + ${customList.getEndDate()}"></div>
+        </div>
+    </div>
+</div>
 
-<table border="2" width=95%>
-    <tr>
-        <th>RequestType</th>
-        <th>Details</th>
-        <th>Address</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Status</th>
-        <th>Cancel</th>
-    </tr>
-    <tr th:each="customList : ${activeList}">
-        <td th:text="${customList.requestType}"></td>
-        <td th:text="${customList.details}"></td>
-        <td th:text="${customList.address}"></td>
-        <td th:text="${customList.startDate}"></td>
-        <td th:text="${customList.endDate}"></td>
-        <td th:text="${customList.status}"></td>
-        <td class="link"><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></td>
-    </tr>
-</table>
+<div class="inactiveReq">
+    <h2>Inactive Requests</h2>
+    <div class="requestContainer" th:each="customList : ${inactiveList}">
+        <div class="requestBody">
+            <div class="requesType">
+                <img class="requestTypeImg" th:src="'/images/bag.png'" />
+                <p class="requestTypeName" th:text="${customList.requestType}"></p>
+            </div>
+            <div class="details">
+                <p class="detailsName">Details: </p>
+                <p th:text="${customList.details}"></p>
+            </div>
+        </div>
+        <div class="requestFooter">
+            <div class="statusInactive" th:text="'Status: ' + ${customList.getStatus()}"></div>
+            <div class="endDate" th:text="'End date: ' + ${customList.getEndDate()}"></div>
+        </div>
+    </div>
+</div>
 
-<h2>Inactive requests</h2>
+<!--<div class="inactiveReq">-->
+<!--    <h2>Inactive Requests</h2>-->
+<!--    <div class="requestContainer" th:each="customList : ${inactiveList}" >-->
+<!--        <div class="requestBody">-->
+<!--            <div class="requesType">-->
+<!--                <img class="requestTypeImg" src="pet.png" />-->
+<!--                <p class="requestTypeName" th:text="${customList.requestType}"></p>-->
+<!--            </div>-->
+<!--            <div class="details">-->
+<!--                <p class="detailsName">Details: </p>-->
+<!--                <p th:text="${customList.details}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="requestFooter">-->
+<!--            <div class="statusInactive" th:text="'Status: ' + ${customList.status}"></div>-->
+<!--            <div class="endDate" th:text="'End date: ' + ${customList.endDate}"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<table border="2" width=95%>
-    <tr>
-        <th>RequestType</th>
-        <th>Details</th>
-        <th>Address</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Status</th>
-        <th>Rejection Reason</th>
-    </tr>
-    <tr th:each="customList : ${inactiveList}">
-        <td th:text="${customList.requestType}"></td>
-        <td th:text="${customList.details}"></td>
-        <td th:text="${customList.address}"></td>
-        <td th:text="${customList.startDate}"></td>
-        <td th:text="${customList.endDate}"></td>
-        <td th:text="${customList.status}"></td>
-        <td th:text="${customList.rejectionReason}"></td>
-    </tr>
-</table>
+<!--<ul>-->
+<!--    <li><h1>Hello <span th:text="${fn}"></span> <span th:text="${ln}"></span>!</h1></li>-->
 
-<script src="js/collapse.js"></script>
+<!--    <li>-->
+<!--        <form action="requester/placeRequest" method="get">-->
+<!--            <input type="submit" value="Place request">-->
+<!--        </form>-->
+<!--    </li>-->
 
+<!--    <li>-->
+<!--        <form action="/" method="get">-->
+<!--            <input type="submit" value="Homepage"/>-->
+<!--        </form>-->
+<!--    </li>-->
+
+<!--    <li>-->
+<!--        <form action="/logout" method="get">-->
+<!--            <input type="submit" value="Logout"/>-->
+<!--        </form>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<!--<tr th:each="index : ${#numbers.sequence( 0, #arrays.length(active)-1)}">-->
+<!--    <button type="button" class="collapsible"-->
+<!--            th:text="|${active[index].requestType}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${active[index].details}|+' &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; '+|${size[index]} volunteer|"></button>-->
+<!--    <div class="content">-->
+<!--        <div th:each="volunteer : ${active[index].volunteers}">-->
+<!--            <button type="button" class="collapsible"-->
+<!--                    th:text="Name + ': ' +${volunteer.firstName}+' '+${volunteer.lastName}"></button>-->
+<!--            <div class="content">-->
+<!--                <table border="2" width="30%">-->
+<!--                    <tr>-->
+<!--                        <td>Country:</td>-->
+<!--                        <td th:text="${volunteer.county}"></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>City:</td>-->
+<!--                        <td th:text="${volunteer.city}"></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>Nr. of requests completed:</td>-->
+<!--                        <td th:text="${volunteer.completedRequest} ?: '0'"></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>Phone:</td>-->
+<!--                        <td th:text="${volunteer.phoneNumber}"></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>Email:</td>-->
+<!--                        <td th:text="${volunteer.email}"></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td colspan="2" class="link"><a-->
+<!--                                th:href="@{/requester/completed/}+ ${active[index]?.requestId} +'/'+ ${volunteer?.id}">Completed</a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</tr>-->
+
+<!--<h2>Active requests</h2>-->
+
+<!--<table border="2" width=95%>-->
+<!--    <tr>-->
+<!--        <th>RequestType</th>-->
+<!--        <th>Details</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Start date</th>-->
+<!--        <th>End date</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Cancel</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="customList : ${activeList}">-->
+<!--        <td th:text="${customList.requestType}"></td>-->
+<!--        <td th:text="${customList.details}"></td>-->
+<!--        <td th:text="${customList.address}"></td>-->
+<!--        <td th:text="${customList.startDate}"></td>-->
+<!--        <td th:text="${customList.endDate}"></td>-->
+<!--        <td th:text="${customList.status}"></td>-->
+<!--        <td class="link"><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<!--<h2>Inactive requests</h2>-->
+
+<!--<table border="2" width=95%>-->
+<!--    <tr>-->
+<!--        <th>RequestType</th>-->
+<!--        <th>Details</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Start date</th>-->
+<!--        <th>End date</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Rejection Reason</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="customList : ${inactiveList}">-->
+<!--        <td th:text="${customList.requestType}"></td>-->
+<!--        <td th:text="${customList.details}"></td>-->
+<!--        <td th:text="${customList.address}"></td>-->
+<!--        <td th:text="${customList.startDate}"></td>-->
+<!--        <td th:text="${customList.endDate}"></td>-->
+<!--        <td th:text="${customList.status}"></td>-->
+<!--        <td th:text="${customList.rejectionReason}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
 </body>
 </html>

@@ -1,0 +1,254 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat;
+}
+
+/* NAVBAR START */
+
+.navbar {
+    height: 75px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #6E44FF;
+}
+
+.textLogo {
+    margin: 0 0 0 23px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #FF6084;
+}
+
+.prButton{
+    text-decoration: none;
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    width: 225px;
+    height: 45px;
+    border-radius: 100px;
+}
+
+.logoutBtn {
+    text-decoration: none;
+    color: white;
+    background-color: #1B98E0;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    margin-right: 20px;
+    width: 150px;
+    height: 45px;
+    border-radius: 100px;
+}
+
+/* NAVBAR END */
+
+.inactiveReq {
+    width: 1000px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.activeReq {
+    width: 1000px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    margin-left: 15px;
+}
+
+h2 {
+    margin-left: 30px;
+}
+
+/* REQUEST CONTAINER START */
+
+.requestContainer {
+    width: 1000px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* .requestHeader {
+  background-color: #D8D8D8;
+  border-radius: 30px 30px 0 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profilePic {
+  margin-top: 4px;
+  margin-left: 10px;
+  width: 47px;
+  height: 47px;
+}
+
+.profileName {
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.requestLocation {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 30px;
+} */
+
+
+
+.requestBody {
+    border-radius: 30px 30px 0 0;
+    background-color: #F2F2F2;
+    flex-grow: 1;
+}
+
+.requesType {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 16px 0 16px;
+}
+
+.requestTypeImg {
+    width: 60px;
+    height: 60px;
+}
+
+.requestTypeName {
+    margin-left: 20px;
+    font-size: 25px;
+}
+
+.details {
+    background-color: #F2F2F2;
+    padding: 0 32px 0 32px;
+    margin-bottom: 30px;
+}
+
+.detailsName {
+    font-size: 20px;
+}
+
+.volunteersDropdown{
+    background-color: #dfdfdf;
+    padding-left: 30px;
+}
+
+.firstRow, .secondRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.secondRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.volunteer {
+    border-top: 2px solid gray;
+    background-color: #dfdfdf;
+}
+
+.volunteer p {
+    margin-left: 30px;
+}
+
+.volunteerCompBtn a {
+    text-decoration: none;
+    color: white;
+    background-color: #4CAF50;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    width: 170px;
+    height: 40px;
+    border-radius: 100px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.requestFooter {
+    background-color: #D8D8D8;
+    border-radius: 0 0 30px 30px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cancelButton {
+    text-decoration: none;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-left: 16px;
+    width: 120px;
+    height: 40px;
+    border-radius: 100px;
+}
+
+.cancelButton a {
+    text-decoration: none;
+    color: white;
+}
+
+.cancelButton:hover {
+    cursor: pointer;
+}
+
+.statusInactive {
+    margin-left: 36px;
+    font-weight: bold;
+}
+
+.endDate {
+    margin-right: 36px;
+    font-size: 18px;
+}
+
+/* REQUEST CONTAINER END */

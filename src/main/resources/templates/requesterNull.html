@@ -1,77 +1,140 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Requester</title>
-    <link rel="stylesheet" type="text/css" href="css/req.css"/>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/requester.css}"/>
+<!--    <script th:src="@{/js/collapse.js}" }></script>-->
+    <title>Own Requests</title>
 </head>
+
 <body>
+<div class="navbar">
+    <div class="textLogo">
+        <p>CovidHelp</p>
+    </div>
+    <a class="prButton" th:href="@{requester/placeRequest}">Place Request</a>
+    <a class="logoutBtn" th:href="@{/logout}">Log out</a>
+</div>
 
-<ul>
-    <li><h1>Hello <span th:text="${fn}"></span> <span th:text="${ln}"></span>!</h1></li>
+<div class="activeReq">
+    <h1 th:text="'Hello '+ ${fn} + ' ' + ${ln}"></h1>
+    <h2>Active Requests</h2>
+    <div class="requestContainer" th:each="customList : ${activeList}">
+        <div class="requestBody">
+            <div class="requesType">
+                <img class="requestTypeImg" th:src="'/images/bag.png'" />
+                <p class="requestTypeName" th:text="${customList.requestType}"></p>
+            </div>
+            <div class="details">
+                <p class="detailsName">Details: </p>
+                <p th:text="${customList.details}"></p>
+            </div>
+        </div>
+        <div class="requestFooter">
+            <div class="cancelButton"><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></div>
+            <div class="endDate" th:text="'End date: ' + ${customList.getEndDate()}"></div>
+        </div>
+    </div>
+</div>
 
-    <li>
-        <form action="requester/placeRequest" method="get">
-            <input type="submit" value="Place request">
-        </form>
-    </li>
+<div class="inactiveReq">
+    <h2>Inactive Requests</h2>
+    <div class="requestContainer" th:each="customList : ${inactiveList}">
+        <div class="requestBody">
+            <div class="requesType">
+                <img class="requestTypeImg" th:src="'/images/bag.png'" />
+                <p class="requestTypeName" th:text="${customList.requestType}"></p>
+            </div>
+            <div class="details">
+                <p class="detailsName">Details: </p>
+                <p th:text="${customList.details}"></p>
+            </div>
+        </div>
+        <div class="requestFooter">
+            <div class="statusInactive" th:text="'Status: ' + ${customList.getStatus()}"></div>
+            <div class="endDate" th:text="'End date: ' + ${customList.getEndDate()}"></div>
+        </div>
+    </div>
+</div>
 
-    <li>
-        <form action="/" method="get">
-            <input type="submit" value="Homepage"/>
-        </form>
-    </li>
 
-    <li>
-        <form action="/logout" method="get">
-            <input type="submit" value="Logout"/>
-        </form>
-    </li>
-</ul>
 
-<h2>Active requests</h2>
+<!--<html xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <title>Requester</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="css/req.css"/>-->
+<!--</head>-->
+<!--<body>-->
 
-<table border="2" width=95%>
-    <tr>
-        <th>RequestType</th>
-        <th>Details</th>
-        <th>Address</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Status</th>
-        <th>Cancel</th>
-    </tr>
-    <tr th:each="customList : ${activeList}">
-        <td th:text="${customList.requestType}"></td>
-        <td th:text="${customList.details}"></td>
-        <td th:text="${customList.address}"></td>
-        <td th:text="${customList.startDate}"></td>
-        <td th:text="${customList.endDate}"></td>
-        <td th:text="${customList.status}"></td>
-        <td><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></td>
-    </tr>
-</table>
+<!--<ul>-->
+<!--    <li><h1>Hello <span th:text="${fn}"></span> <span th:text="${ln}"></span>!</h1></li>-->
 
-<h2>Inactive requests</h2>
+<!--    <li>-->
+<!--        <form action="requester/placeRequest" method="get">-->
+<!--            <input type="submit" value="Place request">-->
+<!--        </form>-->
+<!--    </li>-->
 
-<table border="2" width=95%>
-    <tr>
-        <th>RequestType</th>
-        <th>Details</th>
-        <th>Address</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Status</th>
-        <th>Rejection Reason</th>
-    </tr>
-    <tr th:each="customList : ${inactiveList}">
-        <td th:text="${customList.requestType}"></td>
-        <td th:text="${customList.details}"></td>
-        <td th:text="${customList.address}"></td>
-        <td th:text="${customList.startDate}"></td>
-        <td th:text="${customList.endDate}"></td>
-        <td th:text="${customList.status}"></td>
-        <td th:text="${customList.rejectionReason}"></td>
-    </tr>
-</table>
+<!--    <li>-->
+<!--        <form action="/" method="get">-->
+<!--            <input type="submit" value="Homepage"/>-->
+<!--        </form>-->
+<!--    </li>-->
 
-</body>
-</html>
+<!--    <li>-->
+<!--        <form action="/logout" method="get">-->
+<!--            <input type="submit" value="Logout"/>-->
+<!--        </form>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<!--<h2>Active requests</h2>-->
+
+<!--<table border="2" width=95%>-->
+<!--    <tr>-->
+<!--        <th>RequestType</th>-->
+<!--        <th>Details</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Start date</th>-->
+<!--        <th>End date</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Cancel</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="customList : ${activeList}">-->
+<!--        <td th:text="${customList.requestType}"></td>-->
+<!--        <td th:text="${customList.details}"></td>-->
+<!--        <td th:text="${customList.address}"></td>-->
+<!--        <td th:text="${customList.startDate}"></td>-->
+<!--        <td th:text="${customList.endDate}"></td>-->
+<!--        <td th:text="${customList.status}"></td>-->
+<!--        <td><a th:href="@{/requester/} + ${customList?.requestId}">Cancel</a></td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<!--<h2>Inactive requests</h2>-->
+
+<!--<table border="2" width=95%>-->
+<!--    <tr>-->
+<!--        <th>RequestType</th>-->
+<!--        <th>Details</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Start date</th>-->
+<!--        <th>End date</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Rejection Reason</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="customList : ${inactiveList}">-->
+<!--        <td th:text="${customList.requestType}"></td>-->
+<!--        <td th:text="${customList.details}"></td>-->
+<!--        <td th:text="${customList.address}"></td>-->
+<!--        <td th:text="${customList.startDate}"></td>-->
+<!--        <td th:text="${customList.endDate}"></td>-->
+<!--        <td th:text="${customList.status}"></td>-->
+<!--        <td th:text="${customList.rejectionReason}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<!--</body>-->
+<!--</html>-->
