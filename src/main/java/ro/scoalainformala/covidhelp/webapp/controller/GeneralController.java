@@ -53,7 +53,8 @@ public class GeneralController {
             return save;
         }
         generalService.add(account);
-        save.setViewName("successful");
+        save.setViewName("login");
+        save.addObject("successMessage", "Registered successfully! Please sign in");
         return save;
     }
 }

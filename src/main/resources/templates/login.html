@@ -12,7 +12,7 @@
 
 <form action="/login" class="login-form" method="post">
     <h1>Welcome</h1>
-
+    <p class="success" th:text="${successMessage}"></p>
     <p class="warning" th:text="${invalid}"></p>
 
     <div class="txtb">

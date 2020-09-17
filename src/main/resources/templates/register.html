@@ -1,132 +1,151 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Register</title>
-    <link rel="stylesheet" type="text/css" href="/css/req.css"/>
+    <meta charset="utf-8">
+    <title>CovidHelp Register</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 </head>
+
 <body>
+<form th:action="@{/saveUser}" th:object="${account}" class="register-form" method="post">
+    <h1>Register</h1>
 
-<h2>Register user</h2>
+    <div class="names">
+        <div class="txtb fname">
+            <input type="text" th:name="firstName" required>
+            <span data-placeholder="First name"></span>
+        </div>
+        <span class="errors" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        <div class="txtb lname">
+            <input type="text" th:name="lastName" required>
+            <span data-placeholder="Last name"></span>
+        </div>
+        <span class="errors" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+    </div>
 
-<form action="#" th:action="@{/saveUser}" th:object="${account}" method="post">
-    <table border="2" width=95%>
-        <tr>
-            <th width="30%"><label>Field</label></th>
-            <th><label>Data</label></th>
-        </tr>
-        <tr>
-            <td><label>First name</label></td>
-            <td><input type="text" th:name="firstName" th:id="firstName">
-                <span class="errors" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Last name</label></td>
-            <td><input type="text" th:name="lastName" th:id="lastName">
-                <span class="errors" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input type="email" th:name="email" th:id="email">
-                <span class="errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Password</label></td>
-            <td><input type="password" th:name="password" th:id="password">
-                <span class="errors" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Phone number</label></td>
-            <td><input type="text" th:name="phoneNumber" th:id="phoneNumber">
-                <span class="errors" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Birthday</label></td>
-            <td><input type="date" th:name="birthDate" th:id="birthDate">
-                <span class="errors" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Country</label></td>
-            <td><select th:name="county">
-                <option disabled selected value> -- select an option -- </option>
-                <option th:text="Alba"></option>
-                <option th:text="Arad"></option>
-                <option th:text="Argeș"></option>
-                <option th:text="Bacău"></option>
-                <option th:text="Bihor"></option>
-                <option th:text="Bistrița-Năsăud"></option>
-                <option th:text="Botoșani"></option>
-                <option th:text="Brașov"></option>
-                <option th:text="Brăila"></option>
-                <option th:text="București"></option>
-                <option th:text="Buzău"></option>
-                <option th:text="Caraș-Severin"></option>
-                <option th:text="Călărași"></option>
-                <option th:text="Cluj"></option>
-                <option th:text="Constanța"></option>
-                <option th:text="Covasna"></option>
-                <option th:text="Dâmbovița"></option>
-                <option th:text="Dolj"></option>
-                <option th:text="Galați"></option>
-                <option th:text="Giurgiu"></option>
-                <option th:text="Gorj"></option>
-                <option th:text="Harghita"></option>
-                <option th:text="Hunedoara"></option>
-                <option th:text="Ialomița"></option>
-                <option th:text="Iași"></option>
-                <option th:text="Ilfov"></option>
-                <option th:text="Maramureș"></option>
-                <option th:text="Mehedinți"></option>
-                <option th:text="Mureș"></option>
-                <option th:text="Neamț"></option>
-                <option th:text="Olt"></option>
-                <option th:text="Prahova"></option>
-                <option th:text="Satu-Mare"></option>
-                <option th:text="Sălaj"></option>
-                <option th:text="Sibiu"></option>
-                <option th:text="Suceava"></option>
-                <option th:text="Teleorman"></option>
-                <option th:text="Timiș"></option>
-                <option th:text="Tulcea"></option>
-                <option th:text="Vaslui"></option>
-                <option th:text="Vâlcea"></option>
-                <option th:text="Vrancea"></option>
-            </select><span class="errors" th:if="${#fields.hasErrors('county')}" th:errors="*{county}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label>City</label></td>
-            <td><input type="text" th:name="city" th:id="city">
-                <span class="errors" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Address</label></td>
-            <td><input type="text" th:name="address" th:id="address">
-                <span class="errors" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Street</label></td>
-            <td><input type="text" th:name="street" th:id="street">
-                <span class="errors" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Profile image</label></td>
-            <td><input type="text" th:name="profileImage" th:id="profileImage">
-                <span class="errors" th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}"></span></td>
-        </tr>
-        <tr>
-            <td><label>Role</label></td>
-            <td><select th:name="role" th:id="role">
-                <option disabled selected value> -- select an option -- </option>
-                <option th:text="ROLE_REQUESTER"></option>
-                <option th:text="ROLE_VOLUNTEER"></option>
-            </select><span class="errors" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span></td>
-        </tr>
-    </table>
-    <input type="submit" class="edit" value="Submit">
+    <div class="txtb">
+        <input type="email" th:name="email" required>
+        <span data-placeholder="Email"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+    <div class="txtb">
+        <input type="password" th:name="password" required>
+        <span data-placeholder="Password"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+    <div class="txtb date">
+        <input type="date" th:name="birthDate" required>
+        <span data-placeholder="Birthdate"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
+
+    <div class="txtb">
+        <input type="text" th:name="phoneNumber" required>
+        <span data-placeholder="Phone number"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+
+    <div class="txtb select">
+        <select class="" th:name="county" required>
+            <option value="" selected disabled hidden>County</option>
+            <option value="Alba">Alba</option>
+            <option value="Arad">Arad</option>
+            <option value="Argeș">Argeș</option>
+            <option value="Bihor">Bihor</option>
+            <option value="Bistrița-Năsăud">Bistrița-Năsăud</option>
+            <option value="Botoșani">Botoșani</option>
+            <option value="Brașov">Brașov</option>
+            <option value="Brăila">Brăila</option>
+            <option value="București">București</option>
+            <option value="Buzău">Buzău</option>
+            <option value="Caraș-Severin">Caraș-Severin</option>
+            <option value="Călărași">Călărași</option>
+            <option value="Cluj">Cluj</option>
+            <option value="Constanța">Constanța</option>
+            <option value="Covasna">Covasna</option>
+            <option value="Dâmbovița">Dâmbovița</option>
+            <option value="Dolj">Dolj</option>
+            <option value="Galați">Galați</option>
+            <option value="Giurgiu">Giurgiu</option>
+            <option value="Gorj">Gorj</option>
+            <option value="Harghita">Harghita</option>
+            <option value="Hunedoara">Hunedoara</option>
+            <option value="Ialomița">Ialomița</option>
+            <option value="Iași">Iași</option>
+            <option value="Ilfov">Ilfov</option>
+            <option value="Maramureș">Maramureș</option>
+            <option value="Mehedinți">Mehedinți</option>
+            <option value="Mureș">Mureș</option>
+            <option value="Neamț">Neamț</option>
+            <option value="Olt">Olt</option>
+            <option value="Prahova">Prahova</option>
+            <option value="Satu-Mare">Satu-Mare</option>
+            <option value="Sălaj">Sălaj</option>
+            <option value="Sibiu">Sibiu</option>
+            <option value="Suceava">Suceava</option>
+            <option value="Teleorman">Teleorman</option>
+            <option value="Timiș">Timiș</option>
+            <option value="Tulcea">Tulcea</option>
+            <option value="Vaslui">Vaslui</option>
+            <option value="Vâlcea">Vâlcea</option>
+            <option value="Vrancea">Vrancea</option>
+        </select>
+        <span data-placeholder="County"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('county')}" th:errors="*{county}"></span>
+
+    <div class="txtb">
+        <input type="text" th:name="city" required>
+        <span data-placeholder="City"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+
+    <div class="txtb">
+        <input type="text" th:name="street" required>
+        <span data-placeholder="Street"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
+
+    <div class="txtb select">
+        <select class="" th:name="role" required>
+            <option value="" disabled selected hidden>Account type</option>
+            <option value="ROLE_VOLUNTEER">Volunteer</option>
+            <option value="ROLE_REQUESTER">Requester</option>
+        </select>
+        <span data-placeholder="Account type"></span>
+    </div>
+    <span class="errors" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
+<!--    <span class="errors" th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}"></span>-->
+<!--    <span class="errors" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>-->
+
+    <input type="submit" class="regbtn" value="Register">
 </form>
 
-<form action="/" method="get">
-    <input type="submit" class="edit" value="Homepage">
-</form>
+<script type="text/javascript">
+    $(".txtb input").on("focus", function() {
+        $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur", function() {
+        if ($(this).val() == "")
+            $(this).removeClass("focus");
+    });
+
+    $(".txtb select").on("focus", function() {
+        $(this).addClass("focus");
+    });
+
+    $(".txtb select").on("blur", function() {
+        if ($(this).val() == "")
+            $(this).removeClass("focus");
+    });
+</script>
+
 
 </body>
+
 </html>

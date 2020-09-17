@@ -65,7 +65,6 @@ public class Account {
     private String street;
 
     @Column
-    @NotBlank
     private String address;
 
     @Column(nullable = false, unique = true)
@@ -73,7 +72,6 @@ public class Account {
     private String phoneNumber;
 
     @Column
-    @NotBlank
     private String profileImage;
 
     @Column
