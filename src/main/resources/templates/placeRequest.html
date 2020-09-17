@@ -2,16 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800' rel='stylesheet'>
     <link rel="stylesheet" th:href="@{/css/placeRequest.css}"/>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title>Place request</title>
 </head>
 <body>
-<p>
-<form action="/logout" method="get">
-    <input type="submit" value="Logout"/>
-</form>
-</p>
+<div class="navbar">
+    <div class="textLogo">
+        <p>CovidHelp</p>
+    </div>
+    <div>
+        <a class="logoutBtn" href="/logout">Log out</a>
+    </div>
+</div>
 <div class="placeRequestForm">
     <form th:action="@{/requester/placeRequest}" th:object="${request}" method="post">
         <label for="type">Request type</label>

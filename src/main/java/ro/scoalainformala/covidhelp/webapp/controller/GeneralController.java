@@ -53,17 +53,8 @@ public class GeneralController {
             return save;
         }
         generalService.add(account);
-        save.setViewName("successful");
+        save.setViewName("login");
+        save.addObject("successMessage", "Registered successfully! Please sign in");
         return save;
     }
-
-    //you can remove this 2 method to create these controllers
-
-    @RequestMapping(value = "/admin", method = GET)
-    public ModelAndView admin() {
-        ModelAndView admin = new ModelAndView();
-        admin.setViewName("admin");
-        return admin;
-    }
-
 }

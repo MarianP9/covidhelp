@@ -49,22 +49,27 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestBrowseDto> getAvailableRequestsByCounty(String county) {
-        List<RequestBrowseDto> requestList = new ArrayList<>();
-        repository.getRequestByStatusAndRequesterCounty(Status.APPROVED, county)
-                .forEach(request -> requestList.add(transformer.transform(request)));
-        System.out.println("Queried requests for " + county + " , found " + requestList.size() + " results");
-        return requestList;
-    }
-
-    @Override
-    public List<RequestBrowseDto> getAvailableRequestsByCountyAndCity(String county, String city) {
-        List<RequestBrowseDto> requestList = new ArrayList<>();
-        repository.getRequestByStatusAndAndRequesterCountyAndAndRequesterCity(Status.APPROVED, county, city)
-                .forEach(request -> requestList.add(transformer.transform(request)));
-        System.out.println("Queried requests for " + county +", "+ city + ", found " + requestList.size() + " results");
-        return requestList;
-
+    public List<RequestBrowseDto> getFilteredAvailableRequests(String county, String city, String type) {
+        List<RequestBrowseDto> requestDtoList = new ArrayList<>();
+        List<Request> requestList;
+        if(county.isEmpty() && city.isEmpty() && type.isEmpty())
+            requestList = repository.getRequestsByStatus(Status.APPROVED);
+        else if(county.isEmpty() && city.isEmpty())
+            requestList = repository.getRequestByStatusAndType(Status.APPROVED, requestTypeRepository.findByTypeName(type));
+        else if(county.isEmpty() && type.isEmpty())
+            requestList = repository.getRequestByStatusAndRequesterCity(Status.APPROVED, city);
+        else if(city.isEmpty() && type.isEmpty())
+            requestList = repository.getRequestByStatusAndRequesterCounty(Status.APPROVED, county);
+        else if(county.isEmpty())
+            requestList = repository.getRequestByStatusAndRequesterCityAndType(Status.APPROVED, city, requestTypeRepository.findByTypeName(type));
+        else if(city.isEmpty())
+            requestList = repository.getRequestByStatusAndRequesterCountyAndType(Status.APPROVED, county, requestTypeRepository.findByTypeName(type));
+        else if(type.isEmpty())
+            requestList = repository.getRequestByStatusAndRequesterCountyAndRequesterCity(Status.APPROVED, county, city);
+        else
+            requestList = repository.getRequestByStatusAndRequesterCountyAndRequesterCityAndType(Status.APPROVED, county, city, requestTypeRepository.findByTypeName(type));
+        requestList.forEach(request -> requestDtoList.add(transformer.transform(request)));
+        return requestDtoList;
     }
 
     @Override
